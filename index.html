@@ -325,7 +325,6 @@
       max-width: 72%;
       max-height: 72%;
       object-fit: contain;
-      mix-blend-mode: multiply;
     }
     /* scroll-in: logos slide from alternating left / right to centre */
     .skill-icon.r {
@@ -648,7 +647,7 @@
       <div class="skill-icon r" title="Dash"><img src="img/skills/Dash.png" alt="Dash"></div>
       <div class="skill-icon r" title="PyTorch"><img src="img/skills/pytorch.png" alt="PyTorch"></div>
       <div class="skill-icon r" title="TensorFlow"><img src="img/skills/Tensorflow_logo.png" alt="TensorFlow"></div>
-      <div class="skill-icon r" title="scikit-learn"><img src="img/skills/scikit%20learn.png" alt="scikit-learn"></div>
+      <div class="skill-icon r" title="scikit-learn"><img src="img/skills/scikit%20learn.jpg" alt="scikit-learn"></div>
       <div class="skill-icon r" title="Pandas"><img src="img/skills/pandas.png" alt="Pandas"></div>
       <div class="skill-icon r" title="NumPy"><img src="img/skills/numpy.png" alt="NumPy"></div>
       <div class="skill-icon r" title="Hugging Face"><img src="img/skills/huggingface.png" alt="Hugging Face"></div>
@@ -872,8 +871,7 @@
     }, 900);
   });
 
-  // ── typewriter ──
-  // type name, delete, then type tagline and stop
+  // ── typewriter (continuous loop) ──
   const el      = document.getElementById('typed');
   const phrases = ["Varsha_Shetty.", "makes_AI_think."];
   let pi = 0, ci = 0, deleting = false;
@@ -883,7 +881,7 @@
     if (!deleting) {
       el.textContent = word.slice(0, ++ci);
       if (ci === word.length) {
-        if (pi === phrases.length - 1) return; // stop on last phrase
+        // pause at end of word, then start deleting
         deleting = true;
         setTimeout(tick, 1400);
         return;
@@ -891,14 +889,16 @@
     } else {
       el.textContent = word.slice(0, --ci);
       if (ci === 0) {
+        // move to next phrase (wrap to start) and begin typing again
         deleting = false;
-        pi++;
+        pi = (pi + 1) % phrases.length;
         setTimeout(tick, 300);
         return;
       }
     }
     setTimeout(tick, deleting ? 40 : 90);
   }
+
   setTimeout(tick, 900);
 
   // ── scroll-reveal ──
