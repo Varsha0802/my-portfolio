@@ -264,6 +264,16 @@
       font-size: .94rem; color: var(--mid);
       line-height: 1.92; margin-bottom: 1.1rem; font-weight: 400;
     }
+    .about-copy a {
+      color: var(--dark); text-decoration: none;
+      font-weight: 500;
+    }
+    .about-copy a::after {
+      content: ' ↗';
+      font-size: .72em; color: var(--caramel);
+      vertical-align: super; line-height: 0;
+    }
+    .about-copy a:hover { color: var(--caramel); }
     .chips {
       display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem;
     }
