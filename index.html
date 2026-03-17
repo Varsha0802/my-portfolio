@@ -470,6 +470,173 @@
     }
     .proj-link:hover { gap: .6rem; }
 
+    /* ─────────────── JOURNEY ─────────────── */
+    .journey-intro {
+      text-align: center; margin-bottom: 4.5rem;
+    }
+    .journey-intro-text {
+      font-size: .95rem; color: var(--mid);
+      line-height: 2; margin-bottom: 2rem;
+      max-width: 580px; margin-left: auto; margin-right: auto;
+    }
+
+    .journey-container {
+      position: relative; width: 100%;
+      max-width: 700px; margin: 0 auto;
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Central data hub */
+    .journey-data {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(90px, 20vw, 140px); height: clamp(90px, 20vw, 140px);
+      background: linear-gradient(135deg, #E8D4C4, #DCC9B8);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      box-shadow: 0 12px 46px rgba(212,163,115,.2);
+      transition: all .4s ease;
+      cursor: default;
+    }
+    .journey-data:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      box-shadow: 0 18px 60px rgba(212,163,115,.3);
+    }
+    .journey-data-text {
+      font-size: clamp(.7rem, 2vw, 1.1rem); font-weight: 600;
+      color: #fff; letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* Orbiting phase nodes */
+    .journey-phases {
+      position: relative;
+      width: 100%; height: 100%;
+    }
+    .journey-phase {
+      position: absolute;
+      width: clamp(80px, 19vw, 135px); height: clamp(80px, 19vw, 135px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      cursor: pointer;
+      user-select: none;
+      transition: all .35s cubic-bezier(.34,.1,.68,.55);
+      left: 50%; top: 50%;
+      transform-origin: center;
+      box-shadow: 0 8px 28px rgba(0,0,0,.08);
+      border: 2px solid rgba(212,163,115,.3);
+    }
+    .journey-phase::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.4);
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none;
+    }
+    .journey-phase:hover::before {
+      opacity: 1;
+    }
+    .journey-phase:hover {
+      box-shadow: 0 16px 44px rgba(212,163,115,.4);
+      border-color: var(--caramel);
+      filter: brightness(1.06);
+    }
+
+    .journey-phase-color-1 { background: linear-gradient(135deg, #FFD4C0, #FFC9B3); }
+    .journey-phase-color-2 { background: linear-gradient(135deg, #E6D4F0, #DCC9E8); }
+    .journey-phase-color-3 { background: linear-gradient(135deg, #C9E4FF, #B8D9FF); }
+    .journey-phase-color-4 { background: linear-gradient(135deg, #C9F0E1, #B8EBD7); }
+    .journey-phase-color-5 { background: linear-gradient(135deg, #FFE8C9, #FFD9B3); }
+    .journey-phase-color-6 { background: linear-gradient(135deg, #E6D4C0, #DCC9B3); }
+
+    .journey-phase-name {
+      font-size: clamp(.6rem, 1.5vw, .85rem); font-weight: 700;
+      color: #fff; text-align: center;
+      letter-spacing: .04em; line-height: 1.3;
+      padding: 0 .5rem;
+    }
+
+    /* Detail panel for selected phase */
+    .journey-detail {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) perspective(800px) rotateY(90deg) scale(0.85);
+      background: var(--peach); border: 1px solid var(--border);
+      border-radius: 20px; padding: clamp(1.25rem, 4vw, 2rem);
+      width: 90%; max-width: 460px;
+      opacity: 0; visibility: hidden;
+      transition: transform .45s cubic-bezier(.34,.1,.68,.55), opacity .35s ease, visibility 0s .45s;
+      z-index: 20;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      backface-visibility: hidden;
+    }
+    .journey-detail.active {
+      opacity: 1; visibility: visible;
+      transform: translate(-50%, -50%) perspective(800px) rotateY(0deg) scale(1);
+      transition: transform .45s cubic-bezier(.34,.1,.68,.55), opacity .35s ease, visibility 0s 0s;
+    }
+    .journey-detail-phase {
+      font-size: .72rem; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--caramel);
+      font-weight: 600; margin-bottom: .5rem;
+    }
+    .journey-detail-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem; font-weight: 600;
+      color: var(--dark); margin-bottom: 1rem;
+    }
+    .journey-detail-desc {
+      font-size: .88rem; color: var(--mid);
+      line-height: 1.85; margin-bottom: 1.25rem;
+    }
+    .journey-detail-tags {
+      display: flex; flex-wrap: wrap; gap: .45rem;
+    }
+    .journey-detail-tag {
+      font-size: .68rem; padding: .28rem .8rem;
+      border-radius: 50px; background: var(--lime);
+      color: var(--dark); font-weight: 500;
+    }
+
+    /* Connecting lines (decorative SVG) */
+    .journey-connections {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 1;
+    }
+
+    .journey-phases { z-index: 3; }
+
+    .journey-detail-close {
+      position: absolute; top: .75rem; right: .9rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.2rem; color: var(--mid);
+      line-height: 1; padding: .2rem .4rem;
+      border-radius: 50%; transition: background .2s, color .2s;
+    }
+    .journey-detail-close:hover { background: rgba(0,0,0,.07); color: var(--dark); }
+
+    /* Overlay to dim diagram when card is open */
+    .journey-overlay {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.5);
+      backdrop-filter: blur(2px);
+      border-radius: 12px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .35s ease, visibility 0s .35s;
+      z-index: 15;
+    }
+    .journey-container.detail-open .journey-overlay {
+      opacity: 1; visibility: visible;
+      transition: opacity .35s ease, visibility 0s 0s;
+      pointer-events: auto;
+    }
+
+    /* ─────────────── PROJECTS ─────────────── */
+
     /* ─────────────── AWARDS ─────────────── */
     .award-list { display: flex; flex-direction: column; gap: .875rem; }
     .award-row {
@@ -613,9 +780,15 @@
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .proj-grid  { grid-template-columns: 1fr; }
       footer { padding: 3rem 1.75rem; }
+
+      .journey-container { aspect-ratio: 1; }
     }
     @media (max-width: 560px) {
       .hero { padding: 7rem 1.75rem 4rem; }
+      .journey-intro-text { font-size: .85rem; }
+      .journey-detail-title { font-size: 1.1rem; }
+      .journey-detail-desc { font-size: .8rem; }
+      .journey-detail-tag { font-size: .62rem; }
     }
   </style>
 </head>
@@ -631,6 +804,7 @@
   <a href="#home" class="nav-logo">VS</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -699,6 +873,144 @@
     </div>
   </div>
 </section>
+
+<!-- ═══════════════ JOURNEY ═══════════════ -->
+<div class="section-alt" id="journey">
+  <div class="section-inner">
+    <div class="eyebrow">My Approach</div>
+    <h2 class="sh">My ML Engineering Journey</h2>
+    <div class="journey-intro r">
+      <p class="journey-intro-text">
+        I follow a structured, iterative process to build ML systems that deliver real impact. From deeply understanding business goals to deploying robust models, my journey is defined by continuous learning, collaboration, and a relentless focus on data-driven results.
+      </p>
+    </div>
+
+    <div class="journey-container r">
+      <svg class="journey-connections" viewBox="0 0 900 900" width="100%" height="100%">
+        <circle cx="450" cy="450" r="280" fill="none" stroke="rgba(212,163,115,0.12)" stroke-width="1" stroke-dasharray="5,5"/>
+        <g stroke="rgba(212,163,115,0.15)" stroke-width="1.5" fill="none">
+          <line x1="450" y1="170" x2="450" y2="450"/>
+          <line x1="450" y1="450" x2="733" y2="281"/>
+          <line x1="450" y1="450" x2="733" y2="619"/>
+          <line x1="450" y1="450" x2="450" y2="730"/>
+          <line x1="450" y1="450" x2="167" y2="619"/>
+          <line x1="450" y1="450" x2="167" y2="281"/>
+        </g>
+      </svg>
+
+      <div class="journey-data">
+        <div class="journey-data-text">Data</div>
+      </div>
+
+      <div class="journey-phases">
+        <div class="journey-phase journey-phase-color-1" data-phase="0">
+          <div class="journey-phase-name">Business<br>Understanding</div>
+        </div>
+        <div class="journey-phase journey-phase-color-2" data-phase="1">
+          <div class="journey-phase-name">Data<br>Understanding</div>
+        </div>
+        <div class="journey-phase journey-phase-color-3" data-phase="2">
+          <div class="journey-phase-name">Data<br>Preparation</div>
+        </div>
+        <div class="journey-phase journey-phase-color-4" data-phase="3">
+          <div class="journey-phase-name">Modeling</div>
+        </div>
+        <div class="journey-phase journey-phase-color-5" data-phase="4">
+          <div class="journey-phase-name">Evaluation</div>
+        </div>
+        <div class="journey-phase journey-phase-color-6" data-phase="5">
+          <div class="journey-phase-name">Deployment</div>
+        </div>
+      </div>
+
+      <div class="journey-overlay"></div>
+
+      <div class="journey-detail" id="detail-0">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 1</div>
+        <div class="journey-detail-title">Business Understanding</div>
+        <div class="journey-detail-desc">
+          I start by deeply understanding project goals, stakeholder needs, and success metrics. I define clear business objectives, identify key constraints, and establish measurable success criteria that align ML outcomes with real business impact.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">Goal Definition</span>
+          <span class="journey-detail-tag">Stakeholder Alignment</span>
+          <span class="journey-detail-tag">Metrics Design</span>
+        </div>
+      </div>
+
+      <div class="journey-detail" id="detail-1">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 2</div>
+        <div class="journey-detail-title">Data Understanding</div>
+        <div class="journey-detail-desc">
+          I perform comprehensive exploratory data analysis—examining distributions, correlations, and anomalies. I profile data quality, identify patterns, and uncover insights that guide feature engineering and preprocessing strategies.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">EDA</span>
+          <span class="journey-detail-tag">Data Profiling</span>
+          <span class="journey-detail-tag">Statistical Analysis</span>
+        </div>
+      </div>
+
+      <div class="journey-detail" id="detail-2">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 3</div>
+        <div class="journey-detail-title">Data Preparation</div>
+        <div class="journey-detail-desc">
+          I clean, transform, and engineer features to create high-quality datasets ready for modeling. This includes handling missing values, outliers, imbalanced classes, and feature scaling—crucial for ML model performance.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">Cleaning</span>
+          <span class="journey-detail-tag">Feature Engineering</span>
+          <span class="journey-detail-tag">Preprocessing</span>
+        </div>
+      </div>
+
+      <div class="journey-detail" id="detail-3">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 4</div>
+        <div class="journey-detail-title">Modeling</div>
+        <div class="journey-detail-desc">
+          I select, train, and tune ML models tailored to the problem. Whether it's classical ML (Random Forest, XGBoost) or deep learning (PyTorch, Transformers), I optimize hyperparameters and ensemble multiple approaches for best results.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">Model Selection</span>
+          <span class="journey-detail-tag">Hyperparameter Tuning</span>
+          <span class="journey-detail-tag">Ensembling</span>
+        </div>
+      </div>
+
+      <div class="journey-detail" id="detail-4">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 5</div>
+        <div class="journey-detail-title">Evaluation</div>
+        <div class="journey-detail-desc">
+          I rigorously test model performance using cross-validation, hold-out testing, and adversarial testing. I assess fairness across demographic groups, detect drift, and provide comprehensive metrics and insights for stakeholders.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">Cross-Validation</span>
+          <span class="journey-detail-tag">Fairness Testing</span>
+          <span class="journey-detail-tag">Performance Metrics</span>
+        </div>
+      </div>
+
+      <div class="journey-detail" id="detail-5">
+        <button class="journey-detail-close" aria-label="Close">&times;</button>
+        <div class="journey-detail-phase">Phase 6</div>
+        <div class="journey-detail-title">Deployment</div>
+        <div class="journey-detail-desc">
+          I deploy models to production on infrastructure like SLURM clusters, AWS, or Docker containers with robust monitoring. I set up pipelines for continuous updates, track model drift, and ensure systems remain performant and reliable.
+        </div>
+        <div class="journey-detail-tags">
+          <span class="journey-detail-tag">CI/CD Pipelines</span>
+          <span class="journey-detail-tag">Infrastructure</span>
+          <span class="journey-detail-tag">Monitoring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════ SKILLS ═══════════════ -->
 <div class="section-alt" id="skills">
@@ -941,6 +1253,7 @@
       <div class="footer-col">
         <div class="footer-col-title">Navigate</div>
         <a href="#about">About</a>
+        <a href="#journey">Journey</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
@@ -1096,6 +1409,68 @@
         : null;
     }
   })();
+
+  // ── journey interactive flow ──
+  (function() {
+    const container = document.querySelector('.journey-container');
+    if (!container) return;
+
+    const phases = document.querySelectorAll('.journey-phase');
+    const details = document.querySelectorAll('.journey-detail');
+
+    // Position phases in circular pattern (6 phases around the center)
+    const angles = [0, 60, 120, 180, 240, 300]; // degrees
+
+    function positionPhases() {
+      const size = Math.min(container.offsetWidth, container.offsetHeight);
+      const radius = size * 0.37;
+      phases.forEach((phase, i) => {
+        const angle = (angles[i] * Math.PI) / 180;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        phase.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+      });
+    }
+
+    positionPhases();
+    new ResizeObserver(positionPhases).observe(container);
+
+    const overlay = container.querySelector('.journey-overlay');
+
+    function closeAll() {
+      details.forEach(d => d.classList.remove('active'));
+      container.classList.remove('detail-open');
+    }
+
+    // Click to show/hide details
+    phases.forEach((phase, i) => {
+      phase.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const detail = document.getElementById(`detail-${i}`);
+        const isAlreadyOpen = detail && detail.classList.contains('active');
+        closeAll();
+        if (!isAlreadyOpen && detail) {
+          detail.classList.add('active');
+          container.classList.add('detail-open');
+        }
+      });
+    });
+
+    // Close via overlay click or close button
+    if (overlay) overlay.addEventListener('click', closeAll);
+    document.querySelectorAll('.journey-detail-close').forEach(btn => {
+      btn.addEventListener('click', (e) => { e.stopPropagation(); closeAll(); });
+    });
+
+    // Trigger scroll reveal for journey section
+    setTimeout(() => {
+      const journeyIntro = document.querySelector('.journey-intro');
+      const journeyContainer = document.querySelector('.journey-container');
+      if (journeyIntro && journeyIntro.classList.contains('r')) obs.observe(journeyIntro);
+      if (journeyContainer && journeyContainer.classList.contains('r')) obs.observe(journeyContainer);
+    }, 100);
+  })();
+
 
 </script>
 </body>
